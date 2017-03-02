@@ -232,8 +232,9 @@ class Visualization(object):
             plt.ylabel('% usage')
             plt.title('CPU Usage - {}'.format(self.host_name))
             lg = plt.legend(frameon=False, loc='upper right')
-            lg_txts = lg.get_texts()
-            plt.setp(lg_txts, fontsize=10)
+            if lg is not None:
+                lg_txts = lg.get_texts()
+                plt.setp(lg_txts, fontsize=10)
             plt_idx += 1
 
         if self.enable_mem:
@@ -250,7 +251,7 @@ class Visualization(object):
                           colors=['navajowhite', 'sandybrown'])
             ax1.set_ylabel('Mem Usage (GB)')
 
-            plt.xlabel('time (min)')
+            ax1.set_xlabel('time (min)')
             plt.title('Memory Usage - {}'.format(self.host_name))
 
             lg = plt.legend([mpatches.Patch(color='navajowhite'),
@@ -258,9 +259,10 @@ class Visualization(object):
                              line],
                             ['Cached Memory', 'Used Memory', '% mem used'],
                             loc='upper right')
-            lg.get_frame().set_alpha(0.6)
-            lg_txts = lg.get_texts()
-            plt.setp(lg_txts, fontsize=10)
+            if lg is not None:
+                lg.get_frame().set_alpha(0.6)
+                lg_txts = lg.get_texts()
+                plt.setp(lg_txts, fontsize=10)
             plt_idx += 1
 
         if self.enable_paging:
@@ -273,8 +275,9 @@ class Visualization(object):
             plt.ylabel('faults/s')
             plt.title('Page Faults - {}'.format(self.host_name))
             lg = plt.legend(frameon=False)
-            lg_txts = lg.get_texts()
-            plt.setp(lg_txts, fontsize=10)
+            if lg is not None:
+                lg_txts = lg.get_texts()
+                plt.setp(lg_txts, fontsize=10)
             plt_idx += 1
 
             plt.subplot(self.num_plots, 1, plt_idx)
@@ -286,8 +289,9 @@ class Visualization(object):
             plt.ylabel('KB/s')
             plt.title('Page Ins and Outs - {}'.format(self.host_name))
             lg = plt.legend(frameon=False, loc='upper right')
-            lg_txts = lg.get_texts()
-            plt.setp(lg_txts, fontsize=10)
+            if lg is not None:
+                lg_txts = lg.get_texts()
+                plt.setp(lg_txts, fontsize=10)
             plt_idx += 1
 
         if self.enable_net:
@@ -302,9 +306,10 @@ class Visualization(object):
             plt.ylabel('MB/s')
             plt.title('Network Usage - {}'.format(self.host_name))
             lg = plt.legend(ncol=len(self.rcv_per_sec.keys()), frameon=False, loc='upper right')
-            lg.get_frame().set_alpha(0)
-            lg_txts = lg.get_texts()
-            plt.setp(lg_txts, fontsize=10)
+            if lg is not None:
+                lg.get_frame().set_alpha(0)
+                lg_txts = lg.get_texts()
+                plt.setp(lg_txts, fontsize=10)
             plt_idx += 1
 
         if self.enable_io:
@@ -317,8 +322,10 @@ class Visualization(object):
             plt.ylabel('kilo-blocks/s')
             plt.title('Disk IO - {}'.format(self.host_name))
             lg = plt.legend(frameon=False, loc = 'upper right')
-            lg_txts = lg.get_texts()
-            plt.setp(lg_txts, fontsize=10)
+            if lg is not None:
+                lg_txts = lg.get_texts()
+                plt.setp(lg_txts, fontsize=10)
+            plt_idx += 1
 
         if self.enable_dev:
             plt.subplot(self.num_plots, 1, plt_idx)
@@ -332,9 +339,10 @@ class Visualization(object):
             plt.ylabel('kilo-sections/s')
             plt.title('Device Usage - {}'.format(self.host_name))
             lg = plt.legend(ncol=len(self.rd_per_sec.keys()), frameon=False, loc='upper right')
-            lg.get_frame().set_alpha(0)
-            lg_txts = lg.get_texts()
-            plt.setp(lg_txts, fontsize=10)
+            if lg is not None:
+                lg.get_frame().set_alpha(0)
+                lg_txts = lg.get_texts()
+                plt.setp(lg_txts, fontsize=10)
             plt_idx += 1
 
         fig.tight_layout()
