@@ -621,7 +621,8 @@ class Parser(object):
                         else:
                             return_dict[full_time][sectionname] = value
 
-        return_dict['time_list'] = time_list
+        if len(time_list) > 0:
+            return_dict['time_list'] = time_list
         return (return_dict)
 
     def __get_filedate(self):

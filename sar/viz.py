@@ -108,7 +108,10 @@ class Visualization(object):
     def _preprocess_sar_data(self):
         self.host_name = self.sar_data['host']
         for t in Visualization.SAR_TYPES:
-            if t in self.sar_data and self.sar_data[t]:
+            if t in self.sar_data \
+            and self.sar_data[t] \
+            and 'time_list' in self.sar_data[t] \
+            and self.sar_data[t]['time_list']:
                 time_points = self.sar_data[t]['time_list']
                 self.time_points = time_points
                 break
