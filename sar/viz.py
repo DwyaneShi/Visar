@@ -109,8 +109,7 @@ class Visualization(object):
         self.host_name = self.sar_data['host']
         for t in Visualization.SAR_TYPES:
             if t in self.sar_data and self.sar_data[t]:
-                time_points = self.sar_data[t].keys()
-                time_points.sort()
+                time_points = self.sar_data[t]['time_list']
                 self.time_points = time_points
                 break
 
@@ -162,6 +161,7 @@ class Visualization(object):
         if self.enable_net:
             factor = 1024
             net_data = self.sar_data['net']
+            dp = {}
             for tp in self.time_points:
                 dp = net_data[tp]
                 for iface in dp.keys():

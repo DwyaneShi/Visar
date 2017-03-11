@@ -492,6 +492,7 @@ class Parser(object):
         return_dict = {}
 
         pattern_re = re.compile(pattern)
+        time_list = []
 
         for part_line in info_part.split("\n"):
             pattern = ''
@@ -537,6 +538,9 @@ class Parser(object):
                             hours = int(full_time[:2]) + 12
                             hours = ('%02d' % (hours,))
                             full_time = ('%s:%s' % (hours, full_time[3:]))
+
+                    if full_time not in time_list:
+                        time_list.append(full_time)
 
                     try:
                         blah = return_dict[full_time]
@@ -617,6 +621,7 @@ class Parser(object):
                         else:
                             return_dict[full_time][sectionname] = value
 
+        return_dict['time_list'] = time_list
         return (return_dict)
 
     def __get_filedate(self):
